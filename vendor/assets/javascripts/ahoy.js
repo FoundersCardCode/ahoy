@@ -346,10 +346,14 @@
 
   ahoy.trackClicks = function () {
     // save the text of all <a> elements to a data attribute to ensure the original text is available after any translation
-    $('a').each(function() { $(this).data('original-text', $(this).text()); });
+    $('a').each(function() {
+      if (typeof $(this).data('original-text') === 'undefined') { $(this).data('original-text', $(this).text());  }
+    });
 
     // save the text of all submit buttons to a data attribute to ensure the original text is available after any translation
-    $('input[type="submit"]').each(function() { $(this).data('original-text', $(this).val()); } );
+    $('input[type="submit"]').each(function() {
+      if (typeof $(this).data('original-text') === 'undefined') { $(this).data('original-text', $(this).val());  }
+    });
 
     $(document).on("click", "a, button, input[type=submit]", function (e) {
       var $target = $(e.currentTarget);
